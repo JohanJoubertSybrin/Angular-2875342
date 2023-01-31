@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,11 @@ export class WebStorageService {
     window.localStorage.setItem(key, value);
   }
 
-  public getRemote(){
+  public getRemote(): Observable<string>{
     return this.http.get<string>('/mock/api/filter')
+  }
+
+  public setRemote(payload: string): Observable<string>{
+    return this.http.put<string>('/mock/api/filter', payload)
   }
 }

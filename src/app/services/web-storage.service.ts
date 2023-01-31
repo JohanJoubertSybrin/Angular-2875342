@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http'
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebStorageService {
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   public get(key: string): string | null {
     return window.localStorage.getItem(key);
@@ -13,5 +16,9 @@ export class WebStorageService {
 
   public set(key: string, value: string): void {
     window.localStorage.setItem(key, value);
+  }
+
+  public getRemote(){
+    return this.http.get<string>('/mock/api/filter')
   }
 }
